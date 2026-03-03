@@ -45,16 +45,16 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = {host: "localhost", port: 3000, protocol: "https"}
   #config.action_mailer.default_url_options = {host: "localhost", port: 3000} 
-  #config.action_mailer.default_url_options = {host: "decidim.vps01.chicommons.coop", protocol: "https"}
+  #config.action_mailer.default_url_options = {host: "xxxx", protocol: "https"}
 
   config.active_job.queue_adapter=:delayed_job
   
   config.action_mailer.smtp_settings = {
-    address:         'smtppro.zoho.com',          # ENV['SMTP_ADDRESS'],
+    address:         'xxxx',          # ENV['SMTP_ADDRESS'],
     port:            587,
     domain:          'chicommons.coop',
-    user_name:       'the.team@chicommons.coop',  # ENV['SMTP_USERNAME'],
-    password:        '&Gn84QFgLYq%ZFva',         # ENV['SMTP_PASSWORD'],
+    user_name:       'xxxx',  # ENV['SMTP_USERNAME'],
+    password:        'xxxx',         # ENV['SMTP_PASSWORD'],
     authentication:  :login,
     enable_starttls_auto: true,
     ssl:             false,
