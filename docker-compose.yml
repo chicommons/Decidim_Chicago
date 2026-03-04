@@ -1,26 +1,87 @@
-version: '3'
 services:
-  app:
-    image: decidim/decidim:0.31.2
-    volumes:
-      - .:/app
-      - bundle:/usr/local/bundle
-      - node_modules:/app/node_modules
-    environment:
-      - PORT=3000
-      - DATABASE_HOST=pg
-      - DATABASE_USERNAME=postgres
-      - RAILS_ENV=development
+  decidim:
+    image: decidim/decidim:0.31.2  
     ports:
       - 3000:3000
-    links:
-      - pg
-    command: bundle exec puma
+    volumes:
+      #- ./scripts:/code/vendor
+      - .:/code
+      - bundle:/usr/local/bundle
+      #- node_modules:/app/node_modules
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_HOST=pg
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=
+      - DATABASE_NAME=decidim_development
+      - PORT=3000
+      #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
+      #- SMTP_ADDRESS="",
+      #- SMTP_DOMAIN="",
+      - SMTP_PORT=465,
+      #- SMTP_USERNAME="",
+      #- SMTP_PASSWORD="",
+      - SMTP_AUTHENTICATION="plain",
+      - SMTP_STARTTLS_AUTO=true,
+      - QUEUE_ADAPTER=:delayed_job
+
+    depends_on:
+      pg:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - dnetwork
+    restart: unless-stopped
+    # This command will create and migrate the database automatically on startup
+    command: >
+       bash -c "
+        gem install 'daemons'
+        gem install 'delayed_job_active_record'
+        bundle exec rails db:create db:migrate || true &&
+        bin/rails db:migrate     
+        chmod -R 777 /usr/local/bundle
+        bundle exec rails s -b 0.0.0.0 -p 3000
+       "
+    
   pg:
-    image: postgres
+    image: postgres:17-alpine
     volumes:
       - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=decidim_development
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - dnetwork
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    networks:
+      - dnetwork
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
 volumes:
-  node_modules: {}
-  bundle: {}
   pg-data: {}
+  redis-data: {}
+  bundle:
+
+networks:
+  dnetwork:
+    #external: true
