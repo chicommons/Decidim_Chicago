@@ -40,9 +40,9 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
-        gem install 'decidim-demographics'
-        gem install 'decidim-ai' 
-        gem install 'decidim-collaborative_texts'
+        #gem install 'decidim-demographics'
+        #gem install 'decidim-ai' 
+        #gem install 'decidim-collaborative_texts'
         #gem install 'decidim-conferences' 
         #gem install 'decidim-design' 
         #gem install 'decidim-elections' 
