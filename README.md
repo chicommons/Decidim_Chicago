@@ -14,13 +14,21 @@ Additional Decidim model gems are coded for but not currently implemented becaus
 
 Decidim comes up in development mode with emails handled by letter_opener_web
 
-When implementing on Windows platforms we have encountered some problems with shakapacker where implementation gets stuck in a loop when the docker compose up command is issued. We have found that recompiling shakapacker with the following code remedies this problem
+This installation is designed to run with docker compose. The repo code is mirrored in the container so that all code changes are mirrored directly in the container while it is running.
+
+Setup procedure:
+1. On Windows platforms stop insertion of line-ends: ```git config --global core.autocrlf input```
+1. Clone this repo: ```git clone https://github.com/chicommons/Decidim_Chicago.git```
+1. Change the working directory to the installed repo: ```cd Decidim_Chicago```
+
+When implementing on Windows platforms we have encountered some problems with shakapacker where implementation gets stuck in a loop when the docker compose up command is issued. We have found that recompiling shakapacker with the following code remedies this problem:
 
 ```
 docker compose exec decidim rm -rf public/decidim-packs node_modules
 docker compose exec decidim npm install
 docker compose exec decidim bundle exec rails shakapacker:compile
 ```
+
 
 ## Setting up the application
 
