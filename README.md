@@ -4,7 +4,7 @@ Free Open-Source participatory democracy, citizen participation and open governm
 
 This is the open-source repository for code, based on [Decidim](https://github.com/decidim/decidim).
 
-## ChiCommons Chicago Implementation
+## ChiCommons Chicago Decidim Implementation
 
 This implementation is based on Decidim version 0.31.2
 
