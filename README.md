@@ -20,6 +20,7 @@ Setup procedure:
 1. On Windows platforms stop insertion of line-ends: ```git config --global core.autocrlf input```
 1. Clone this repo: ```git clone https://github.com/chicommons/Decidim_Chicago.git```
 1. Change the working directory to the installed repo: ```cd Decidim_Chicago```
+1. Start Docker: ```docker-compose up```
 
 When implementing on Windows platforms we have encountered some problems with shakapacker where implementation gets stuck in a loop when the docker compose up command is issued. We have found that recompiling shakapacker with the following code remedies this problem:
 
