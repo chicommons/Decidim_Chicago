@@ -1,8 +1,26 @@
-# code
+# Decidim
 
 Free Open-Source participatory democracy, citizen participation and open government for cities and organizations
 
 This is the open-source repository for code, based on [Decidim](https://github.com/decidim/decidim).
+
+## ChiCommons Chicago Implementation
+
+This implementation is based on Decidim version 0.31.2
+
+Additional gems deamons and delayed_job_active_record have been added for email service
+
+Additional Decidim model gems are coded for but not currently implemented because of ops issues
+
+Decidim comes up in development mode with emails handled by letter_opener_web
+
+When implementing on Windows platforms we have encountered some problems with shakapacker where implementation gets stuck in a loop when the docker compose up command is issued. We have found that recompiling shakapacker with the following code remedies this problem
+
+"""
+docker compose exec decidim rm -rf public/decidim-packs node_modules
+docker compose exec decidim npm install
+docker compose exec decidim bundle exec rails shakapacker:compile
+"""
 
 ## Setting up the application
 
