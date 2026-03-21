@@ -18,6 +18,10 @@ services:
       #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
+      - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE=redis
+      - DECIDIM_SPAM_DETECTION_BACKEND_USER=redis
+      - DECIDIM_SPAM_DETECTION_BACKEND_USER_REDIS_URL=redis://redis:6379/3
+      - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE_REDIS_URL=redis://redis:6379/2
       #- SMTP_ADDRESS="",
       #- SMTP_DOMAIN="",
       - SMTP_PORT=465,
@@ -40,14 +44,14 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
-        #gem install 'decidim-demographics'
-        #gem install 'decidim-ai' 
-        #gem install 'decidim-collaborative_texts'
-        #gem install 'decidim-conferences' 
-        #gem install 'decidim-design' 
-        #gem install 'decidim-elections' 
-        #gem install 'decidim-initiatives'
-        #gem install 'decidim-templates'
+        gem install 'decidim-demographics'
+        gem install 'decidim-ai' 
+        gem install 'decidim-collaborative_texts'
+        gem install 'decidim-conferences' 
+        gem install 'decidim-design' 
+        gem install 'decidim-elections' 
+        gem install 'decidim-initiatives'
+        gem install 'decidim-templates'
         bundle exec rails db:create db:migrate || true &&
         bin/rails db:migrate     
         chmod -R 777 /usr/local/bundle
