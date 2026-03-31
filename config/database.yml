@@ -29,7 +29,7 @@ default: &default
 
 development:
   <<: *default
-  database: code_development
+  database: <%= ENV.fetch("DATABASE_NAME", "code_development") %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
