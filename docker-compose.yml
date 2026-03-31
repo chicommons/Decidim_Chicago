@@ -22,13 +22,13 @@ services:
       - DECIDIM_SPAM_DETECTION_BACKEND_USER=redis
       - DECIDIM_SPAM_DETECTION_BACKEND_USER_REDIS_URL=redis://redis:6379/3
       - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE_REDIS_URL=redis://redis:6379/2
-      #- SMTP_ADDRESS="",
-      #- SMTP_DOMAIN="",
-      - SMTP_PORT=465,
-      #- SMTP_USERNAME="",
-      #- SMTP_PASSWORD="",
-      - SMTP_AUTHENTICATION="plain",
-      - SMTP_STARTTLS_AUTO=true,
+      - SMTP_ADDRESS=smtp.gmail.com
+      - SMTP_DOMAIN=gmail.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=<my_email_address>
+      - SMTP_PASSWORD=<my_app_password>
+      - SMTP_AUTHENTICATION=plain
+      - SMTP_STARTTLS_AUTO=true
       - QUEUE_ADAPTER=:delayed_job
 
     depends_on:

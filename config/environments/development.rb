@@ -36,43 +36,38 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  #config.action_mailer.raise_delivery_errors = false  
+  # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.raise_delivery_errors = true
 
-  #config.action_mailer.delivery_method = :smtp
-  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :letter_opener_web
 
-  config.action_mailer.default_url_options = {host: "localhost", port: 3000, protocol: "https"}
-  #config.action_mailer.default_url_options = {host: "localhost", port: 3000} 
-  #config.action_mailer.default_url_options = {host: "xxxx", protocol: "https"}
+  config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "http" }
+  # config.action_mailer.default_url_options = {host: "localhost", port: 3000}
+  # config.action_mailer.default_url_options = {host: "xxxx", protocol: "https"}
 
-  config.active_job.queue_adapter=:delayed_job
-  
   config.action_mailer.smtp_settings = {
-    address:         'xxxx',          # ENV['SMTP_ADDRESS'],
-    port:            587,
-    domain:          'chicommons.coop',
-    user_name:       'xxxx',  # ENV['SMTP_USERNAME'],
-    password:        'xxxx',         # ENV['SMTP_PASSWORD'],
-    authentication:  :login,
+    address: ENV.fetch("SMTP_ADDRESS", nil),
+    port: 587,
+    domain: ENV.fetch("SMTP_DOMAIN", nil),
+    user_name: ENV.fetch("SMTP_USERNAME", nil),
+    password: ENV.fetch("SMTP_PASSWORD", nil),
+    authentication: :login,
     enable_starttls_auto: true,
-    ssl:             false,
-    #tls:             true,
-    open_timeout:    60,
-    read_timeout:    60 }
-
+    ssl: false,
+    # tls:             true,
+    open_timeout: 60,
+    read_timeout: 60
+  }
 
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   # BF changed to true
   config.action_mailer.perform_caching = true
 
-  #config.action_mailer.default_url_options = { host: "chicommons.coop", protocol: 'https' }
-
-
-  # for saving emails to file 
-  config.action_mailer.file_settings = {location: "/code/tmp/mail" }
+  # for saving emails to file
+  config.action_mailer.file_settings = { location: "/code/tmp/mail" }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -93,10 +88,9 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   # add delayed job to queue adapter
-  config.active_job.queue_adapter = :delayed_job
+  config.active_job.queue_adapter = :inline
 
   # Suppress logger output for asset requests.
-  
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
