@@ -3,6 +3,7 @@ services:
     image: decidim/decidim:0.31.2  
     ports:
       - 3000:3000
+      #- 3001:3001
     volumes:
       #- ./scripts:/code/vendor
       - .:/code
@@ -25,8 +26,8 @@ services:
       - SMTP_ADDRESS=smtp.gmail.com
       - SMTP_DOMAIN=gmail.com
       - SMTP_PORT=587
-      - SMTP_USERNAME=<my_email_address>
-      - SMTP_PASSWORD=<my_app_password>
+      - SMTP_USERNAME=xyresd@gmail.com
+      - SMTP_PASSWORD=onceUp0naT!me
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTTLS_AUTO=true
       - QUEUE_ADAPTER=:delayed_job
@@ -44,14 +45,14 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
-        gem install 'decidim-demographics'
-        gem install 'decidim-ai' 
-        gem install 'decidim-collaborative_texts'
-        gem install 'decidim-conferences' 
-        gem install 'decidim-design' 
-        gem install 'decidim-elections' 
-        gem install 'decidim-initiatives'
-        gem install 'decidim-templates'
+        #gem install 'decidim-demographics'
+        #gem install 'decidim-ai' 
+        #gem install 'decidim-collaborative_texts'
+        #gem install 'decidim-conferences' 
+        #gem install 'decidim-design' 
+        #gem install 'decidim-elections' 
+        #gem install 'decidim-initiatives'
+        #gem install 'decidim-templates'
         bundle exec rails db:create db:migrate || true &&
         bin/rails db:migrate     
         chmod -R 777 /usr/local/bundle
