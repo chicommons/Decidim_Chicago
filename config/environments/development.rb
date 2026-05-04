@@ -40,8 +40,8 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
 
-  config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.delivery_method = :letter_opener_web
+  #config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :letter_opener_web
 
   config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "http" }
   # config.action_mailer.default_url_options = {host: "localhost", port: 3000}
@@ -49,13 +49,14 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", nil),
-    port: 587,
+    port: ENV.fetch("SMTP_PORT", nil),
     domain: ENV.fetch("SMTP_DOMAIN", nil),
     user_name: ENV.fetch("SMTP_USERNAME", nil),
     password: ENV.fetch("SMTP_PASSWORD", nil),
     authentication: :login,
     enable_starttls_auto: true,
     ssl: false,
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
     # tls:             true,
     open_timeout: 60,
     read_timeout: 60
