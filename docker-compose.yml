@@ -23,8 +23,6 @@ services:
       - SMTP_ADDRESS=smtp.gmail.com
       - SMTP_DOMAIN=gmail.com
       - SMTP_PORT=587
-      - SMTP_USERNAME=xyresd@gmail.com
-      - SMTP_PASSWORD=onceUp0naT!me
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTTLS_AUTO=true
       - QUEUE_ADAPTER=:delayed_job
