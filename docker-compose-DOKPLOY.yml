@@ -3,7 +3,7 @@ services:
     image: decidim/decidim:0.31.2
     #build: .
     ports:
-      - 3333:3333
+      - 4000:4000
     volumes:
       - .:/code
       - bundle:/usr/local/bundle
@@ -13,7 +13,7 @@ services:
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=
       - DATABASE_NAME=decidim_development
-      - PORT=3333
+      - PORT=4000
       #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
@@ -52,28 +52,28 @@ services:
         bundle exec rails db:create db:migrate #|| true &&
         #bin/rails db:migrate
         chmod -R 777 /usr/local/bundle
-        bundle exec rails s -b 0.0.0.0 -p 3333 
+        bundle exec rails s -b 0.0.0.0 -p 4000 
        "
       labels:
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-web.rule=Host(`decidim.vps01.chicommons.coop`)
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-web.entrypoints=web
-      #- traefik.http.services.testing-decidimcustom-eqp8gs-89-web.loadbalancer.server.port=3333
+      #- traefik.http.services.testing-decidimcustom-eqp8gs-89-web.loadbalancer.server.port=4000
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-web.service=testing-decidimcustom-eqp8gs-89-web
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-web.middlewares=redirect-to-https@file
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-websecure.rule=Host(`decidim.vps01.chicommons.coop`)
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-websecure.entrypoints=websecure
-      #- traefik.http.services.testing-decidimcustom-eqp8gs-89-websecure.loadbalancer.server.port=3333
+      #- traefik.http.services.testing-decidimcustom-eqp8gs-89-websecure.loadbalancer.server.port=4000
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-websecure.service=testing-decidimcustom-eqp8gs-89-websecure
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-websecure.tls.certresolver=letsencrypt
       - traefik.docker.network=dokploy-network
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-web.rule=Host(`decidim.vps01.chicommons.coop`)
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-web.entrypoints=web
-      #- traefik.http.services.testing-decidimcustom-eqp8gs-52-web.loadbalancer.server.port=3333
+      #- traefik.http.services.testing-decidimcustom-eqp8gs-52-web.loadbalancer.server.port=4000
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-web.service=testing-decidimcustom-eqp8gs-52-web
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-web.middlewares=redirect-to-https@file
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-websecure.rule=Host(`decidim.vps01.chicommons.coop`)
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-websecure.entrypoints=websecure
-      #- traefik.http.services.testing-decidimcustom-eqp8gs-52-websecure.loadbalancer.server.port=3333
+      #- traefik.http.services.testing-decidimcustom-eqp8gs-52-websecure.loadbalancer.server.port=4000
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-websecure.service=testing-decidimcustom-eqp8gs-52-websecure
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-52-websecure.tls.certresolver=letsencrypt
       - traefik.enable=true
@@ -83,7 +83,7 @@ services:
       - traefik.http.routers.decidim-websecure.rule=Host(`decidim.vps01.chicommons.coop`)
       - traefik.http.routers.decidim-websecure.entrypoints=websecure
       - traefik.http.routers.decidim-websecure.tls.certresolver=letsencrypt
-      - traefik.http.services.decidim-service.loadbalancer.server.port=3333
+      - traefik.http.services.decidim-service.loadbalancer.server.port=4000
       - traefik.http.services.decidim-service.loadbalancer.server.scheme=http
       - traefik.http.routers.decidim-web.service=decidim-service
       - traefik.http.routers.decidim-websecure.service=decidim-service
