@@ -43,8 +43,11 @@ Rails.application.configure do
   #config.action_mailer.delivery_method = :smtp
   config.action_mailer.delivery_method = :letter_opener_web
 
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000, protocol: "http" }
-  # config.action_mailer.default_url_options = {host: "localhost", port: 3000}
+  # port changed to 4000
+  config.action_mailer.default_url_options = { host: "localhost", port: 4000, protocol: "http" }
+  # required to deal with blocked host
+  config.hosts << "decidim.vps01.chicommons.coop"
+  # config.action_mailer.default_url_options = {host: "localhost", port: 4000}
   # config.action_mailer.default_url_options = {host: "xxxx", protocol: "https"}
 
   config.action_mailer.smtp_settings = {
