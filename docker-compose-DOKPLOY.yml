@@ -54,7 +54,8 @@ services:
         chmod -R 777 /usr/local/bundle
         bundle exec rails s -b 0.0.0.0 -p 4000 
        "
-      labels:
+
+    labels:
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-web.rule=Host(`decidim.vps01.chicommons.coop`)
       #- traefik.http.routers.testing-decidimcustom-eqp8gs-89-web.entrypoints=web
       #- traefik.http.services.testing-decidimcustom-eqp8gs-89-web.loadbalancer.server.port=4000
