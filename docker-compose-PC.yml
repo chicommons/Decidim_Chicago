@@ -1,8 +1,9 @@
 services:
   decidim:
-    image: decidim/decidim:0.31.2  
+    image: decidim/decidim:0.31.2
+    #build: .
     ports:
-      - 3000:3000
+      - 3333:3333
     volumes:
       - .:/code
       - bundle:/usr/local/bundle
@@ -12,7 +13,7 @@ services:
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=
       - DATABASE_NAME=decidim_development
-      - PORT=3000
+      - PORT=3333
       #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
@@ -40,18 +41,18 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
-        gem install 'decidim-demographics'
-        gem install 'decidim-ai' 
-        gem install 'decidim-collaborative_texts'
-        gem install 'decidim-conferences' 
-        gem install 'decidim-design' 
-        gem install 'decidim-elections' 
-        gem install 'decidim-initiatives'
-        gem install 'decidim-templates'
+        gem install 'decidim-demographics' -v '0.31.2'
+        gem install 'decidim-ai' -v  '0.31.2'
+        gem install 'decidim-collaborative_texts' -v  '0.31.2'
+        gem install 'decidim-conferences' -v  '0.31.2'
+        gem install 'decidim-design' -v  '0.31.2'
+        gem install 'decidim-elections' -v  '0.31.2'
+        gem install 'decidim-initiatives' -v  '0.31.2'
+        gem install 'decidim-templates' -v  '0.31.2'
         bundle exec rails db:create db:migrate #|| true &&
         #bin/rails db:migrate
         chmod -R 777 /usr/local/bundle
-        bundle exec rails s -b 0.0.0.0 -p 3000 
+        bundle exec rails s -b 0.0.0.0 -p 3333 
        "
     
   pg:
