@@ -41,14 +41,14 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
-        gem install 'decidim-demographics' -v "0.31.2"
-        gem install 'decidim-ai' -v  "0.31.2"
-        gem install 'decidim-collaborative_texts' -v  "0.31.2"
-        gem install 'decidim-conferences' -v  "0.31.2" 
-        gem install 'decidim-design' -v  "0.31.2" 
-        gem install 'decidim-elections' -v  "0.31.2" 
-        gem install 'decidim-initiatives' -v  "0.31.2"
-        gem install 'decidim-templates' -v  "0.31.2"
+        gem install 'decidim-demographics' -v '0.31.2'
+        gem install 'decidim-ai' -v  '0.31.2'
+        gem install 'decidim-collaborative_texts' -v  '0.31.2'
+        gem install 'decidim-conferences' -v  '0.31.2'
+        gem install 'decidim-design' -v  '0.31.2'
+        gem install 'decidim-elections' -v  '0.31.2'
+        gem install 'decidim-initiatives' -v  '0.31.2'
+        gem install 'decidim-templates' -v  '0.31.2'
         bundle exec rails db:create db:migrate #|| true &&
         #bin/rails db:migrate
         chmod -R 777 /usr/local/bundle
