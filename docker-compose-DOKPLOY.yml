@@ -55,6 +55,16 @@ services:
        "
 
     labels:
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.rule=Host(`decidim.vps01.chicommons.coop`)
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.entrypoints=web
+      - traefik.http.services.testing-decidimdev-rdg9tw-52-web.loadbalancer.server.port=4000
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.service=testing-decidimdev-rdg9tw-52-web
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.testing-decidimdev-rdg9tw-websecure.rule=Host(`decidim.vps01.chicommons.coop`)
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-websecure.entrypoints=websecure
+      - traefik.http.services.testing-decidimdev-rdg9tw-52-websecure.loadbalancer.server.port=4000
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-websecure.service=testing-decidimdev-rdg9tw-52-websecure
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-websecure.tls.certresolver=letsencrypt
       - traefik.docker.network=dokploy-network
       - traefik.enable=true
       - traefik.http.routers.decidim-web.rule=Host(`decidim.vps01.chicommons.coop`)
