@@ -1,7 +1,7 @@
 services:
   decidim:
-    image: decidim/decidim:0.31.2
-    #build: .
+    #image: decidim/decidim:0.31.2
+    build: .
     ports:
       - 4000:4000
     volumes:
@@ -49,7 +49,7 @@ services:
         #gem install 'decidim-templates' -v  '0.31.2'
         bundle exec rails db:create db:migrate #|| true &&
         #bin/rails db:migrate
-        #bundle exec rails assets:precompile
+        bundle exec rails assets:precompile
         chmod -R 777 /usr/local/bundle
         bundle exec rails s -b 0.0.0.0 -p 4000 
        "
