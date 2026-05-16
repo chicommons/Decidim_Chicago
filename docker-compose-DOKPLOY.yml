@@ -1,7 +1,7 @@
 services:
   decidim:
-    image: decidim/decidim:latest # 0.31.0
-    #build: .
+    #image: decidim/decidim:0.31.0
+    build: .
     ports:
       - 4000:4000
     volumes:
@@ -50,7 +50,8 @@ services:
         bundle exec rails db:create db:migrate #|| true &&
         #bin/rails db:migrate
         # possible solution to shakapacker error
-        #bundle exec rails assets:precompile
+        npm install
+        bundle exec rails assets:precompile
         chmod -R 777 /usr/local/bundle
         bundle exec rails s -b 0.0.0.0 -p 4000 
        "
