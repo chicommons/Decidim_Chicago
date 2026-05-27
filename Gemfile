@@ -4,9 +4,8 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-gem "decidim", "0.31.2"
+gem "decidim", "0.31.3"
 gem "decidim-demographics" # "0.31.2"
-
 # loading any of these modules (in sequeunce) seems to lead to error
 #  = /usr/local/bundle/gems/redis-4.8.1/lib/redis/client.rb:398:in
 # `rescue in establish_connection': Error connecting to Redis on
@@ -33,7 +32,7 @@ group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
 
   gem "brakeman", "~> 7.0"
-  gem "decidim-dev", "0.31.2"
+  gem "decidim-dev", "0.31.3"
   gem "net-imap", "~> 0.5.0"
   gem "net-pop", "~> 0.1.1"
 end
