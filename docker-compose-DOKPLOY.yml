@@ -17,6 +17,7 @@ services:
       #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
+      - DECIDIM_API_JWT_SECRET=changeme_generate_a_secure_jwt_secret
       - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE=redis
       - DECIDIM_SPAM_DETECTION_BACKEND_USER=redis
       - DECIDIM_SPAM_DETECTION_BACKEND_USER_REDIS_URL=redis://redis:6379/3
