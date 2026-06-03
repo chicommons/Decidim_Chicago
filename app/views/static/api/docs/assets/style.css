@@ -341,6 +341,39 @@ em {
   border-left: 6px solid #de4f4f;
 }
 
+#sidebar #search {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.01em 16px;
+  margin-bottom: 20px;
+}
+
+#sidebar #search img {
+  position: absolute;
+  left: 10px;
+  height: 16px;
+  width: 16px;
+}
+
+#sidebar #search input {
+  height: 24px;
+  line-height: 1.5;
+  width: 100%;
+  padding-left: 15px;
+  background-color: transparent;
+  color: #444;
+  border: none;
+  font-size: 14px;
+  font-family: "ProximaNova-Semibold";
+}
+
+#sidebar #search input:focus {
+  outline: none;
+}
+
 #sidebar-mobile {
   display: none;
   margin-bottom: 20px;
