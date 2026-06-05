@@ -48,7 +48,7 @@ services:
         gem install 'decidim-elections' -v  '0.31.4'
         gem install 'decidim-initiatives' -v  '0.31.4'
         gem install 'decidim-templates' -v  '0.31.4'
-        #bundle install
+        bundle install
         bundle update decidim
         #bin/rails decidim:upgrade
         bundle exec rails decidim:upgrade
