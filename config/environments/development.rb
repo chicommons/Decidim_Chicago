@@ -47,6 +47,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost", port: 4000, protocol: "http" }
   # required to deal with blocked host
   config.hosts << "decidim.vps01.chicommons.coop"
+  config.hosts << "chihacknight.vps01.chicommons.coop"
   # config.action_mailer.default_url_options = {host: "localhost", port: 4000}
   # config.action_mailer.default_url_options = {host: "xxxx", protocol: "https"}
 
