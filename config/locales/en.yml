@@ -39,7 +39,7 @@ en:
       - :month
       - :day
       - :year
-time:
+  time:
     formats:
       decidim_short: "%m/%d/%Y %H:%M"
       decidim_long: "%B %d, %Y %H:%M"
