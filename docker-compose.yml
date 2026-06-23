@@ -26,7 +26,7 @@ services:
       - SMTP_PORT=587
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTTLS_AUTO=true
-      #- QUEUE_ADAPTER=:delayed_job
+      - QUEUE_ADAPTER=:delayed_job
 
     depends_on:
       pg:
