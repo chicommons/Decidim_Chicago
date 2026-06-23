@@ -27,7 +27,6 @@ services:
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTTLS_AUTO=true
       - QUEUE_ADAPTER=:delayed_job
-      - SECRET_KEY_BASE =qwertyuiop  
 
     depends_on:
       pg:
