@@ -27,5 +27,19 @@
 #       "yes": yup
 #       enabled: "ON"
 
+# US-style date and time formatting
 en:
-  hello: "Hello world"
+  date:
+    formats:
+      decidim_short: "%m/%d/%Y"
+      decidim_short_dashed: "%m-%d-%Y"
+    help:
+      date_format: 'Format: mm/dd/yyyy'
+    order:
+      - :month
+      - :day
+      - :year
+time:
+    formats:
+      decidim_short: "%m/%d/%Y %H:%M"
+      decidim_long: "%B %d, %Y %H:%M"
