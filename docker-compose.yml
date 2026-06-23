@@ -13,7 +13,7 @@ services:
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=
       - DATABASE_NAME=decidim_development
-      - PORT=3333
+      - PORT=4000
       #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
       - REDIS_URL=redis://redis:6379/0
       - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
