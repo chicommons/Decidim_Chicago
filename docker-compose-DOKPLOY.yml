@@ -1,6 +1,6 @@
 services:
   decidim:
-    #image: decidim/decidim:0.31.0
+    #image: decidim/decidim:0.31.4
     build: .
     ports:
       - 4000:4000
@@ -22,7 +22,11 @@ services:
       - DECIDIM_SPAM_DETECTION_BACKEND_USER=redis
       - DECIDIM_SPAM_DETECTION_BACKEND_USER_REDIS_URL=redis://redis:6379/3
       - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE_REDIS_URL=redis://redis:6379/2
-      - SMTP_PORT=587
+      - SMTP_ADDRESS:${SMTP_ADDRESS}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - SMTP_PORT:${SMTP_PORT}
+      - SMTP_PASSWORD=${SMTP_PASSSWORD}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE} 
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTTLS_AUTO=true
       - QUEUE_ADAPTER=:delayed_job
