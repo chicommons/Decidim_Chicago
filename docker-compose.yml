@@ -1,7 +1,7 @@
 services:
   decidim:
-    image: decidim/decidim:0.31.4
-    #build: .
+    #image: decidim/decidim:0.31.4
+    build: .
     ports:
       - 4000:4000
     volumes:
