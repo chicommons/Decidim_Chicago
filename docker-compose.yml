@@ -2,8 +2,8 @@ services:
   decidim:
     #image: decidim/decidim:0.31.4
     build: .
-    env_file: 
-      - .env
+    #env_file: 
+    #  - .env
     ports:
       - 4000:4000
     volumes:
@@ -26,10 +26,10 @@ services:
       - SMTP_AUTHENTICATION=plain
       - SMTP_STARTTLS_AUTO=true
       - QUEUE_ADAPTER=:delayed_job
-      - SMTP_ADDRESS=${SMTP_ADDRESS}
+      - SMTP_ADDRESS:${SMTP_ADDRESS}
       - SMTP_DOMAIN=${SMTP_DOMAIN}
-      - SMTP_PORT=${SMTP_PORT}
-      - SMTP_PASSWORD=${SMTP_PASSSWORD}
+      SMTP_PORT:${SMTP_PORT}
+      SMTP_PASSWORD=${SMTP_PASSSWORD}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
 
     depends_on:
