@@ -92,8 +92,8 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   # add delayed job to queue adapter
-  config.active_job.queue_adapter = :inline
-  #config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?
+  #config.active_job.queue_adapter = :inline
+  config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?
 
   # Suppress logger output for asset requests.
 
