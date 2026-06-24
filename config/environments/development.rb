@@ -54,8 +54,6 @@ Rails.application.configure do
   config.hosts << "decidim.vps01.chicommons.coop"
   config.hosts << "chihacknight.vps01.chicommons.coop"
 
-	 password: "GzY1b4eT2JMi",
-  
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", nil),
     port: ENV.fetch("SMTP_PORT", nil),
