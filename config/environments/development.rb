@@ -40,17 +40,20 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
 
-  #config.action_mailer.delivery_method = :smtp
-  config.action_mailer.delivery_method = :letter_opener_web
 
-  # port changed to 4000
-  config.action_mailer.default_url_options = { host: "localhost", port: 4000, protocol: "http" }
+  # letter_opener config
+  #config.action_mailer.delivery_method = :letter_opener_web
+  #config.action_mailer.default_url_options = { host: "localhost", port: ENV.fetch("PORT", nil), protocol: "http" }
+
+  # smtp config
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {host: "the.team@chicommons.coop", port: ENV.fetch("PORT", nil),  protocol: "https"}
+
+  
   # required to deal with blocked host
   config.hosts << "decidim.vps01.chicommons.coop"
   config.hosts << "chihacknight.vps01.chicommons.coop"
-  # config.action_mailer.default_url_options = {host: "localhost", port: 4000}
-  # config.action_mailer.default_url_options = {host: "xxxx", protocol: "https"}
-
+  
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", nil),
     port: ENV.fetch("SMTP_PORT", nil),
