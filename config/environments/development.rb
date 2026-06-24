@@ -69,6 +69,10 @@ Rails.application.configure do
     read_timeout: 60
   }
 
+  # added 6/24/26 to handle email sending errors
+  config.force_ssl = true
+  config.ssl_options = { redirect: false } # Prevents internal redirect loops inside Dokploy
+  
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   # BF changed to true
