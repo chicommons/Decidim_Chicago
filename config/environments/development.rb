@@ -53,6 +53,8 @@ Rails.application.configure do
   # required to deal with blocked host
   config.hosts << "decidim.vps01.chicommons.coop"
   config.hosts << "chihacknight.vps01.chicommons.coop"
+
+	 password: "GzY1b4eT2JMi",
   
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", nil),
@@ -60,13 +62,13 @@ Rails.application.configure do
     domain: ENV.fetch("SMTP_DOMAIN", nil),
     user_name: ENV.fetch("SMTP_USERNAME", nil),
     password: ENV.fetch("SMTP_PASSWORD", nil),
-    authentication: 'login',
-    ssl: false,
-    tls: false,
+    authentication: :login,
+    enable_starttls_auto: true,
+    #ssl: false,
+    #tls: false,
     #openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-    #enable_starttls_auto: true,
-    open_timeout: 60,
-    read_timeout: 60
+    #open_timeout: 60,
+    #read_timeout: 60
   }
 
   # added 6/24/26 to handle email sending errors
