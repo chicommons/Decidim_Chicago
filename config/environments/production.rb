@@ -58,7 +58,20 @@ Rails.application.configure do
   config.logger = ActiveSupport::Logger.new(STDOUT)
     .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
-end
+  end
+
+  #### added from dev script
+  # required to deal with blocked host
+  config.hosts << "decidim.vps01.chicommons.coop"
+  config.hosts << "chihacknight.vps01.chicommons.coop"
+
+  # letter_opener config
+  #config.action_mailer.delivery_method = :letter_opener_web
+  #config.action_mailer.default_url_options = { host: "localhost", port: ENV.fetch("PORT", nil), protocol: "http" }
+
+  # smtp config
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {host: "the.team@chicommons.coop", port: ENV.fetch("PORT", nil),  protocol: "https"}
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
