@@ -102,8 +102,10 @@ Rails.application.configure do
   # add delayed job to queue adapter
   #config.active_job.queue_adapter = :inline
   #config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?
-  config.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?
-
+  # Remove any accidental leading colons from the string, then cast to symbol
+  queue_env = ENV.fetch("QUEUE_ADAPTER", "delayed_job").to_s.delete_prefix(":")
+  config.active_job.queue_adapter = queue_env.to_sym
+  
   # Suppress logger output for asset requests.
 
   # Raises error for missing translations.
