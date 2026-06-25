@@ -9,6 +9,7 @@ services:
       - bundle:/usr/local/bundle
     environment:
       - RAILS_ENV=production
+      - RAILS_LOG_LEVEL=debug
       - DATABASE_HOST=pg
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=
