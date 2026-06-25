@@ -62,8 +62,8 @@ Rails.application.configure do
     password: ENV.fetch("SMTP_PASSWORD", nil),
     authentication: :login,
     enable_starttls_auto: true,
+    tls: false,
     #ssl: false,
-    #tls: false,
     #openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
     #open_timeout: 60,
     #read_timeout: 60
