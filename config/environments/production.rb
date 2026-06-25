@@ -94,8 +94,14 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
+  #### bf updates 6/24/26
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?
+  # Remove any accidental leading colons from the string, then cast to symbol
+  queue_env = ENV.fetch("QUEUE_ADAPTER", "delayed_job").to_s.delete_prefix(":")
+  config.active_job.queue_adapter = queue_env.to_sym
+
+  # next line commented out
+  #config.active_job.queue_adapter = ENV['QUEUE_ADAPTER'] if ENV['QUEUE_ADAPTER'].present?
   # config.active_job.queue_name_prefix = "code_production"
 
   # Disable caching for Action Mailer templates even if Action Controller
