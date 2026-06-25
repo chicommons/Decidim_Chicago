@@ -85,5 +85,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 
 production:
+  # substituted development database! 6/24/26
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  database: <%= ENV.fetch("DATABASE_NAME", "code_development") %>
+  #<<: *default
+  #url: <%= ENV['DATABASE_URL'] %>
