@@ -75,6 +75,8 @@ Rails.application.configure do
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
+
+  # smtp settings
   config.action_mailer.smtp_settings = {
     :address        => Decidim::Env.new("SMTP_ADDRESS").to_s,
     :port           => Decidim::Env.new("SMTP_PORT", 587).to_i,
@@ -89,7 +91,7 @@ Rails.application.configure do
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_level =:info  # ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
