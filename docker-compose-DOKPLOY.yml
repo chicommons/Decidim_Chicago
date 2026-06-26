@@ -46,6 +46,7 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
+        gem install 'sideqik'
         gem install 'decidim-demographics' -v '0.31.4'
         gem install 'decidim-ai' -v  '0.31.4'
         gem install 'decidim-collaborative_texts' -v  '0.31.4'
@@ -55,7 +56,7 @@ services:
         gem install 'decidim-initiatives' -v  '0.31.4'
         gem install 'decidim-templates' -v  '0.31.4'
         bundle install
-        bundle update decidim
+        #bundle update decidim
         #bin/rails decidim:upgrade
         bundle exec rails decidim:upgrade
         ####
