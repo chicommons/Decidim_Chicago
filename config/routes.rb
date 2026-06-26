@@ -1,4 +1,8 @@
 require "sidekiq/web"
+# added 6/26 for debugging email
+Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
+end
 
 Rails.application.routes.draw do
   if Rails.env.development?
