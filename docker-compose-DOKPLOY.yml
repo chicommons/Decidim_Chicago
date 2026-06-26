@@ -46,7 +46,7 @@ services:
        bash -c "
         gem install 'daemons'
         gem install 'delayed_job_active_record'
-        gem install 'sideqik'
+        gem install 'sidekiq'
         gem install 'decidim-demographics' -v '0.31.4'
         gem install 'decidim-ai' -v  '0.31.4'
         gem install 'decidim-collaborative_texts' -v  '0.31.4'
