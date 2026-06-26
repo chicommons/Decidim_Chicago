@@ -1,7 +1,8 @@
 require "sidekiq/web"
 # added 6/26 for debugging email
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
+  # Change the path to '/sidekiq_dashboard' and give it a unique route helper name
+  mount Sidekiq::Web => '/sidekiq_dashboard', as: 'unique_sidekiq_dashboard'  
 end
 
 Rails.application.routes.draw do
