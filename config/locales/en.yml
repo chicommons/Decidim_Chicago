@@ -58,3 +58,7 @@
 #      - :month
 #      - :day
 #      - :year
+
+
+en:
+  hello: "Hello world"
