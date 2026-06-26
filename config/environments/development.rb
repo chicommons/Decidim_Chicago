@@ -47,9 +47,8 @@ Rails.application.configure do
 
   # smtp config
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {host: "the.team@chicommons.coop", port: ENV.fetch("PORT", nil),  protocol: "https"}
+  config.action_mailer.default_url_options = {host: ENV.fetch("SMTP_DOMAIN", nil), port: ENV.fetch("PORT", nil),  protocol: "https"}
 
-  
   # required to deal with blocked host
   config.hosts << "decidim.vps01.chicommons.coop"
   config.hosts << "chihacknight.vps01.chicommons.coop"
