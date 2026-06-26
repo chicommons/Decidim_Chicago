@@ -29,17 +29,32 @@
 
 # US-style date and time formatting
 en:
-  date:
-    formats:
-      decidim_short: "%m/%d/%Y"
-      decidim_short_dashed: "%m-%d-%Y"
-    help:
-      date_format: 'Format: mm/dd/yyyy'
-    order:
-      - :month
-      - :day
-      - :year
+ date:
+ formats:
+   decidim_short: "%m/%d/%Y"
+   decidim_short_dashed: "%m-%d-%Y"
+   decidim_shxort_with_month_name_short: "%b %d %Y"
+   decidim_with_day_and_month_name: "%A, %b %d %Y"
+   decidim_with_month_name: "%B %d %Y"
+   decidim_with_month_name_short: "%b %d"
+   help:
+     date_format: 'Format: mm/dd/yyyy'
+   order: m-d-y
+   separator: "/"
+
   time:
     formats:
       decidim_short: "%m/%d/%Y %H:%M"
       decidim_long: "%B %d, %Y %H:%M"
+
+#en:
+#  date:
+#    formats:
+#      decidim_short: "%m/%d/%Y"
+#      decidim_short_dashed: "%m-%d-%Y"
+#    help:
+#      date_format: 'Format: mm/dd/yyyy'
+#    order:
+#      - :month
+#      - :day
+#      - :year
