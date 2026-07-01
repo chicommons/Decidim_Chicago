@@ -63,7 +63,6 @@ services:
         bin/rails db:migrate
         #sed -i 's/Env.new("SMTP_STARTTLS_AUTO").to_boolean_string/Env.new("SMTP_STARTTLS_AUTO", true).present?/' config/environments/production.rb
         bin/rails data:migrate
-        bundle exec sidekiq
         ####
         #bundle exec rails db:create db:migrate #|| true &&
         #bin/rails db:migrate
@@ -71,7 +70,8 @@ services:
         npm install
         bundle exec rails assets:precompile
         chmod -R 777 /usr/local/bundle
-        bundle exec rails s -b 0.0.0.0 -p 4000 
+        bundle exec rails s -b 0.0.0.0 -p 4000
+        bundle exec sidekiq
        "
 
     labels:
