@@ -71,7 +71,7 @@ Rails.application.configure do
 
   # smtp config
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {host: "the.team@chicommons.coop", port: ENV.fetch("PORT", nil),  protocol: "https"}
+  config.action_mailer.default_url_options = {host: "chicommons.coop", protocol: "https"}
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
