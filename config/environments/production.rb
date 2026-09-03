@@ -64,6 +64,10 @@ Rails.application.configure do
   # required to deal with blocked host
   config.hosts << "decidim.vps01.chicommons.coop"
   config.hosts << "chihacknight.vps01.chicommons.coop"
+  config.hosts << "patio.vps01.chicommons.coop"
+  config.hosts << "patio.vps02.chicommons.coop"
+  config.hosts << "chihacknight.vps02.chicommons.coop"
+  config.hosts << "nextsystemchicago.vps02.chicommons.coop"
 
   # letter_opener config
   #config.action_mailer.delivery_method = :letter_opener_web
