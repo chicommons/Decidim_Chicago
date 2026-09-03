@@ -87,16 +87,16 @@ services:
       - traefik.http.routers.decidim-decidimcommunity-esdsnx-52-websecure.tls.certresolver=letsencrypt
       - traefik.docker.network=dokploy-network
       - traefik.enable=true
-      - traefik.http.routers.nextsystemchicago-web.rule=Host(`nextsystemchicago.vps02.chicommons.coop`)
-      - traefik.http.routers.nextsystemchicago-web.entrypoints=web
-      - traefik.http.routers.nextsystemchicago-web.middlewares=redirect-to-https@file
-      - traefik.http.routers.nextsystemchicago-websecure.rule=Host(`nextsystemchicago.vps02.chicommons.coop`)
-      - traefik.http.routers.nextsystemchicago-websecure.entrypoints=websecure
-      - traefik.http.routers.nextsystemchicago-websecure.tls.certresolver=letsencrypt
-      - traefik.http.services.nextsystemchicago-service.loadbalancer.server.port=4000
-      - traefik.http.services.nextsystemchicago-service.loadbalancer.server.scheme=http
-      - traefik.http.routers.nextsystemchicago-web.service=nextsystemchicago-service
-      - traefik.http.routers.nextsystemchicago-websecure.service=nextsystemchicago-service
+      - traefik.http.routers.decidim-web.rule=Host(`nextsystemchicago.vps02.chicommons.coop`)
+      - traefik.http.routers.decidim-web.entrypoints=web
+      - traefik.http.routers.decidim-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.decidim-websecure.rule=Host(`nextsystemchicago.vps02.chicommons.coop`)
+      - traefik.http.routers.decidim-websecure.entrypoints=websecure
+      - traefik.http.routers.decidim-websecure.tls.certresolver=letsencrypt
+      - traefik.http.services.decidim-service.loadbalancer.server.port=4000
+      - traefik.http.services.decidim-service.loadbalancer.server.scheme=http
+      - traefik.http.routers.decidim-web.service=decidim-service
+      - traefik.http.routers.decidim-websecure.service=decidim-service
   
   pg:
     image: postgres:17-alpine
