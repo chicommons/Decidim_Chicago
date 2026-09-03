@@ -63,9 +63,9 @@ services:
         bin/rails db:migrate
         #sed -i 's/Env.new("SMTP_STARTTLS_AUTO").to_boolean_string/Env.new("SMTP_STARTTLS_AUTO", true).present?/' config/environments/production.rb
         bin/rails data:migrate
-        ####
-        bundle exec rails db:create db:migrate #|| true &&
-        bin/rails db:migrate
+        #### ONLY RUN THE FIRST TIME!
+        #bundle exec rails db:create db:migrate #|| true &&
+        #bin/rails db:migrate
         # possible solution to shakapacker error
         npm install
         bundle exec rails assets:precompile
