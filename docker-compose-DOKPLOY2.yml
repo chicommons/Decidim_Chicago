@@ -1,0 +1,140 @@
+services:
+  decidim:
+    #image: decidim/decidim:0.31.4
+    build: .
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/code
+      - bundle:/usr/local/bundle
+    environment:
+      - RAILS_ENV=production
+      - RAILS_LOG_LEVEL=debug
+      - DATABASE_HOST=pg
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=
+      - DATABASE_NAME=decidim_development
+      - PORT=4000
+      #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY_BASE=changeme_generate_a_secure_key_for_production
+      - DECIDIM_API_JWT_SECRET=changeme_generate_a_secure_jwt_secret
+      - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE=redis
+      - DECIDIM_SPAM_DETECTION_BACKEND_USER=redis
+      - DECIDIM_SPAM_DETECTION_BACKEND_USER_REDIS_URL=redis://redis:6379/3
+      - DECIDIM_SPAM_DETECTION_BACKEND_RESOURCE_REDIS_URL=redis://redis:6379/2
+      - SMTP_ADDRESS=${SMTP_ADDRESS}
+      - SMTP_USERNAME=${SMTP_USERNAME}
+      - SMTP_DOMAIN=${SMTP_DOMAIN}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE} 
+      - SMTP_AUTHENTICATION=plain
+      - SMTP_STARTTLS_AUTO=true
+      - QUEUE_ADAPTER=sidekiq
+
+    depends_on:
+      pg:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - dokploy-network
+    restart: unless-stopped
+    # This command will create and migrate the database automatically on startup
+    command: >
+       bash -c "
+        gem install 'daemons'
+        #gem install 'delayed_job_active_record'
+        #gem install 'sidekiq'
+        gem install 'decidim-demographics' -v '0.31.4'
+        gem install 'decidim-ai' -v  '0.31.4'
+        gem install 'decidim-collaborative_texts' -v  '0.31.4'
+        gem install 'decidim-conferences' -v  '0.31.4'
+        gem install 'decidim-design' -v  '0.31.4'
+        gem install 'decidim-elections' -v  '0.31.4'
+        gem install 'decidim-initiatives' -v  '0.31.4'
+        gem install 'decidim-templates' -v  '0.31.4'
+        bundle install
+        #bundle update decidim
+        #bin/rails decidim:upgrade
+        bundle exec rails decidim:upgrade
+        ####
+        bin/rails db:migrate
+        #sed -i 's/Env.new("SMTP_STARTTLS_AUTO").to_boolean_string/Env.new("SMTP_STARTTLS_AUTO", true).present?/' config/environments/production.rb
+        bin/rails data:migrate
+        ####
+        #bundle exec rails db:create db:migrate #|| true &&
+        #bin/rails db:migrate
+        # possible solution to shakapacker error
+        npm install
+        bundle exec rails assets:precompile
+        chmod -R 777 /usr/local/bundle
+        bundle exec rails s -b 0.0.0.0 -p 4000
+        bundle exec sidekiq
+       "
+
+    labels:
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.rule=Host(`decidim.vps01.chicommons.coop`)
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.entrypoints=web
+      - traefik.http.services.testing-decidimdev-rdg9tw-52-web.loadbalancer.server.port=4000
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.service=testing-decidimdev-rdg9tw-52-web
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.testing-decidimdev-rdg9tw-websecure.rule=Host(`decidim.vps01.chicommons.coop`)
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-websecure.entrypoints=websecure
+      - traefik.http.services.testing-decidimdev-rdg9tw-52-websecure.loadbalancer.server.port=4000
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-websecure.service=testing-decidimdev-rdg9tw-52-websecure
+      - traefik.http.routers.testing-decidimdev-rdg9tw-52-websecure.tls.certresolver=letsencrypt
+      - traefik.docker.network=dokploy-network
+      - traefik.enable=true
+      - traefik.http.routers.decidim-web.rule=Host(`decidim.vps01.chicommons.coop`)
+      - traefik.http.routers.decidim-web.entrypoints=web
+      - traefik.http.routers.decidim-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.decidim-websecure.rule=Host(`decidim.vps01.chicommons.coop`)
+      - traefik.http.routers.decidim-websecure.entrypoints=websecure
+      - traefik.http.routers.decidim-websecure.tls.certresolver=letsencrypt
+      - traefik.http.services.decidim-service.loadbalancer.server.port=4000
+      - traefik.http.services.decidim-service.loadbalancer.server.scheme=http
+      - traefik.http.routers.decidim-web.service=decidim-service
+      - traefik.http.routers.decidim-websecure.service=decidim-service
+  
+  pg:
+    image: postgres:17-alpine
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=decidim_development
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - dokploy-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    networks:
+      - dokploy-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pg-data: {}
+  redis-data: {}
+  bundle:
+  #node_modules:
+
+networks:
+  dokploy-network:
+    external: true
