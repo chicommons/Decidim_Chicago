@@ -1,3 +1,6 @@
+#######
+####### DECIDIM on VPS02
+#######
 services:
   decidim:
     #image: decidim/decidim:0.31.4
@@ -8,7 +11,7 @@ services:
       - .:/code
       - bundle:/usr/local/bundle
     environment:
-      - RAILS_ENV=production
+      - RAILS_ENV=development
       - RAILS_LOG_LEVEL=debug
       - DATABASE_HOST=pg
       - DATABASE_USERNAME=postgres
