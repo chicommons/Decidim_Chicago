@@ -50,8 +50,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host: ENV.fetch("SMTP_DOMAIN", nil),  protocol: "https"}
 
   # required to deal with blocked host
-  config.hosts << "decidim.vps01.chicommons.coop"
-  config.hosts << "chihacknight.vps01.chicommons.coop"
+  config.hosts << "nextsystemchicago.vps02.chicommons.coop"
+  config.hosts << "chihacknight.vps02.chicommons.coop"
 
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", nil),
