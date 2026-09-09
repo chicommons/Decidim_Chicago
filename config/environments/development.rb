@@ -44,7 +44,7 @@ Rails.application.configure do
 
   # letter_opener config
   config.action_mailer.delivery_method = :letter_opener_web
-  config.action_mailer.default_url_options = { host: "localhost", port: ENV.fetch("PORT", nil), protocol: "http" }
+  config.action_mailer.default_url_options = { host: "localhost", port: ENV.fetch("PORT", nil), protocol: "https" }
 
   # smtp config
   #config.action_mailer.delivery_method = :smtp
