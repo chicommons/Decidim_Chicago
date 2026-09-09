@@ -42,12 +42,12 @@ Rails.application.configure do
 
 
   # letter_opener config
-  #config.action_mailer.delivery_method = :letter_opener_web
-  #config.action_mailer.default_url_options = { host: "localhost", port: ENV.fetch("PORT", nil), protocol: "http" }
+  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.default_url_options = { host: "localhost", port: ENV.fetch("PORT", nil), protocol: "http" }
 
   # smtp config
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {host: ENV.fetch("SMTP_DOMAIN", nil),  protocol: "https"}
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.default_url_options = {host: ENV.fetch("SMTP_DOMAIN", nil),  protocol: "https"}
 
   # required to deal with blocked host
   config.hosts << "nextsystemchicago.vps02.chicommons.coop"
