@@ -55,9 +55,6 @@ Rails.application.configure do
   config.hosts << "nextsystemchicago.vps02.chicommons.coop"
   config.hosts << "chihacknight.vps02.chicommons.coop"
 
-  # to allow console reads
-  config.web_console.permissions = '67.175.45.38/0'
-
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_ADDRESS", nil),
     port: ENV.fetch("SMTP_PORT", 587).to_i,
