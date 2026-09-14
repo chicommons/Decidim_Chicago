@@ -16,7 +16,7 @@ services:
       - DATABASE_HOST=pg
       - DATABASE_USERNAME=postgres
       - DATABASE_PASSWORD=
-      - DATABASE_NAME=decidim_development
+      - DATABASE_NAME=production
       - PORT=4000
       #- RAILS_DEVELOPMENT_HOSTS=decidim.vps01.chicommons.coop
       - REDIS_URL=redis://redis:6379/0
@@ -67,8 +67,8 @@ services:
         #sed -i 's/Env.new("SMTP_STARTTLS_AUTO").to_boolean_string/Env.new("SMTP_STARTTLS_AUTO", true).present?/' config/environments/production.rb
         bin/rails data:migrate
         #### ONLY RUN THE FIRST TIME!
-        #bundle exec rails db:create db:migrate #|| true &&
-        #bin/rails db:migrate
+        bundle exec rails db:create db:migrate #|| true &&
+        bin/rails db:migrate
         # possible solution to shakapacker error
         npm install
         bundle exec rails assets:precompile
