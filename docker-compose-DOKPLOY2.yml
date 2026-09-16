@@ -73,9 +73,9 @@ services:
         npm install
         bundle exec rails assets:precompile
         chmod -R 777 /usr/local/bundle
-        bundle exec rails s -b 0.0.0.0 -p 4000
-        bundle exec sidekiq
-       "
+        bundle exec sidekiq &
+        bundle exec rails s -b 0.0.0.0 -p 4000       
+    "
 
     labels:
       - traefik.http.routers.decidim-decidimcommunity-esdsnx-52-web.rule=Host(`nextsystemchicago.vps02.chicommons.coop`)
