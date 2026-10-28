@@ -204,14 +204,9 @@ GEM
     decidim-budgets (0.31.4)
       decidim-comments (= 0.31.4)
       decidim-core (= 0.31.4)
-    decidim-collaborative_texts (0.31.4)
-      decidim-core (= 0.31.4)
     decidim-comments (0.31.4)
       decidim-core (= 0.31.4)
       redcarpet (~> 3.5, >= 3.5.1)
-    decidim-conferences (0.31.4)
-      decidim-core (= 0.31.4)
-      decidim-meetings (= 0.31.4)
     decidim-core (0.31.4)
       active_link_to (~> 1.0)
       acts_as_list (~> 1.0)
@@ -270,11 +265,6 @@ GEM
     decidim-debates (0.31.4)
       decidim-comments (= 0.31.4)
       decidim-core (= 0.31.4)
-    decidim-demographics (0.31.4)
-      decidim-core (= 0.31.4)
-      decidim-forms (= 0.31.4)
-    decidim-design (0.31.4)
-      decidim-core (= 0.31.4)
     decidim-dev (0.31.4)
       bullet (~> 8.0.0)
       byebug (~> 11.0)
@@ -317,10 +307,6 @@ GEM
       w3c_rspec_validators (~> 0.3.0)
       webmock (~> 3.18)
       wisper-rspec (~> 1.0)
-    decidim-elections (0.31.4)
-      decidim-admin (= 0.31.4)
-      decidim-core (= 0.31.4)
-      decidim-forms (= 0.31.4)
     decidim-forms (0.31.4)
       decidim-core (= 0.31.4)
     decidim-generators (0.31.4)
@@ -357,9 +343,6 @@ GEM
       devise (~> 4.7)
       devise-i18n (~> 1.2)
       devise_invitable (~> 2.0, >= 2.0.9)
-    decidim-templates (0.31.4)
-      decidim-core (= 0.31.4)
-      decidim-forms (= 0.31.4)
     decidim-verifications (0.31.4)
       decidim-core (= 0.31.4)
     declarative-builder (0.2.0)
@@ -954,14 +937,8 @@ DEPENDENCIES
   daemons
   decidim (= 0.31.4)
   decidim-ai
-  decidim-collaborative_texts
-  decidim-conferences
-  decidim-demographics
-  decidim-design
   decidim-dev (= 0.31.4)
-  decidim-elections
   decidim-initiatives
-  decidim-templates
   delayed_job
   delayed_job_active_record (>= 4.1.10)
   letter_opener_web (~> 2.0)

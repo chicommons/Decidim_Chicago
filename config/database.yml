@@ -85,8 +85,19 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 
 production:
-  # substituted development database! 6/24/26
-  <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME", "code_development") %>
-  #<<: *default
-  #url: <%= ENV['DATABASE_URL'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 3) %>
+  # A private schema avoids exposing Decidim user tables through Supabase's
+  # default public-schema Data API. Include extensions for pg_trgm functions.
+  schema_search_path: <%= [ENV.fetch("DATABASE_SCHEMA", "public"), "public", "extensions"].uniq.join(",") %>
+  # Do not merge development's localhost/database defaults into a hosted URL.
+  <% if ENV["DATABASE_URL"].to_s != "" %>
+  url: <%= ENV["DATABASE_URL"].inspect %>
+  <% else %>
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", "") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "").inspect %>
+  database: <%= ENV.fetch("DATABASE_NAME", "code_production") %>
+  <% end %>

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+: "${DATABASE_URL:?Set DATABASE_URL}"
+: "${REDIS_URL:?Set REDIS_URL}"
+: "${SECRET_KEY_BASE:?Set SECRET_KEY_BASE}"
+
+if [[ "${RUN_EMBEDDED_WORKER:-false}" != "true" ]]; then
+  exec bundle exec rails server -b 0.0.0.0 -p "${PORT:-3000}"
+fi
+
+# One foreground delayed_job worker plus Puma, supervised together. This is
+# suitable for one small replica; larger deployments should split the worker.
+bundle exec rake jobs:work &
+worker_pid=$!
+bundle exec rails server -b 0.0.0.0 -p "${PORT:-3000}" &
+web_pid=$!
+
+shutdown() {
+  kill -TERM "$worker_pid" "$web_pid" 2>/dev/null || true
+  wait "$worker_pid" "$web_pid" 2>/dev/null || true
+}
+trap 'shutdown; exit 0' TERM INT
+
+set +e
+wait -n "$worker_pid" "$web_pid"
+status=$?
+set -e
+shutdown
+# Even a clean, unexpected child exit must restart the whole service.
+if [[ "$status" == "0" ]]; then status=1; fi
+exit "$status"

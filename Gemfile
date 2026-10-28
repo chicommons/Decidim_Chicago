@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby RUBY_VERSION 
+ruby "~> 3.3.0"
 
 gem "decidim", "0.31.4"
 # gem "decidim-demographics" 

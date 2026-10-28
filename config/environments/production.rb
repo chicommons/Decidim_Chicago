@@ -46,13 +46,15 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
   # Skip http-to-https redirect for the default health check endpoint.
-  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+  config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  config.public_file_server.enabled = ENV.fetch("RAILS_SERVE_STATIC_FILES", "true") == "true"
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -68,6 +70,13 @@ Rails.application.configure do
   config.hosts << "patio.vps02.chicommons.coop"
   config.hosts << "chihacknight.vps02.chicommons.coop"
   config.hosts << "nextsystemchicago.vps02.chicommons.coop"
+  %w[APP_HOST RAILWAY_PUBLIC_DOMAIN RAILWAY_PRIVATE_DOMAIN].each do |key|
+    config.hosts << ENV[key] if ENV[key].present?
+  end
+  ENV.fetch("RAILS_ALLOWED_HOSTS", "").split(",").map(&:strip).reject(&:empty?).each do |host|
+    config.hosts << host
+  end
+  config.hosts << "healthcheck.railway.app"
 
   # letter_opener config
   #config.action_mailer.delivery_method = :letter_opener_web
@@ -75,7 +84,10 @@ Rails.application.configure do
 
   # smtp config
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {host: "chicommons.coop", protocol: "https"}
+  config.action_mailer.default_url_options = {
+    host: ENV["APP_HOST"].presence || ENV["RAILWAY_PUBLIC_DOMAIN"].presence || "chicommons.coop",
+    protocol: "https"
+  }
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
@@ -88,15 +100,15 @@ Rails.application.configure do
     :user_name      => Decidim::Env.new("SMTP_USERNAME").to_s,
     :password       => Decidim::Env.new("SMTP_PASSWORD").to_s,
     :domain         => Decidim::Env.new("SMTP_DOMAIN").to_s,
-    :enable_starttls_auto => Decidim::Env.new("SMTP_STARTTLS_AUTO", true).present?,
-    :openssl_verify_mode => 'none'
+    :enable_starttls_auto => ENV.fetch("SMTP_STARTTLS_AUTO", "true") == "true",
+    :openssl_verify_mode => 'peer'
   }
 
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
   # take out to get debug information
-  # config.log_level =:info  # ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

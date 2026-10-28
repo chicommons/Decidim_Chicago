@@ -7,10 +7,16 @@ class AddFollowableCounterCacheToConferences < ActiveRecord::Migration[5.2]
 
     reversible do |dir|
       dir.up do
-        Decidim::Conference.reset_column_information
-        Decidim::Conference.unscoped.find_each do |record|
-          record.class.reset_counters(record.id, :follows)
-        end
+        # Historical migrations must work even when the Conferences engine is
+        # disabled. Preserve the backfill without loading its current model.
+        execute <<~SQL
+          UPDATE decidim_conferences AS conferences
+          SET follows_count = (
+            SELECT COUNT(*) FROM decidim_follows AS follows
+            WHERE follows.decidim_followable_type = 'Decidim::Conference'
+              AND follows.decidim_followable_id = conferences.id
+          )
+        SQL
       end
     end
   end
